@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeaceLane - Your Path to Mental Well-being</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Body & Typography */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #e6ffe6 0%, #d1f8d1 100%); /* Light green, inviting gradient */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: #4CAF50; /* Primary green color for headings */
+            font-weight: 700;
+        }
+
+        /* Header */
+        header {
+            background-color: #f0fff0; /* Very light green for header */
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #d4ecd4;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            font-size: 1.05em;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #4CAF50;
+        }
+
+        .auth-controls button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-left: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-controls button:hover {
+            background-color: #388E3C;
+            transform: translateY(-2px);
+        }
+
+        #headerGreeting {
+            font-size: 1.1em;
+            color: #4CAF50;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+
+        /* Main Banner */
+        .main-banner {
+            background: url('https://via.placeholder.com/1500x500/e0ffe0/a0e0a0?text=PeaceLane') no-repeat center center/cover; /* Placeholder image */
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+            padding: 0 5%;
+        }
+
+        .banner-overlay {
+            background-color: rgba(0, 0, 0, 0.4); /* Darker overlay for text readability */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .banner-content h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            color: white; /* White for banner heading */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .banner-content p {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        }
+
+        .banner-content button {
+            background-color: #ffc107; /* Accent yellow for CTA */
+            color: #333;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .banner-content button:hover {
+            background-color: #e0a800;
+            transform: translateY(-3px);
+        }
+
+        /* NEW: Assessment Call-to-Action Section */
+        .assessment-cta {
+            background-color: #e0f2e0; /* Light green background */
+            padding: 60px 5%;
+            text-align: center;
+            margin: 50px auto;
+            max-width: 900px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .assessment-cta .cta-content {
+            padding: 20px;
+        }
+
+        .assessment-cta h3 {
+            font-size: 2.5em;
+            color: #388E3C;
+            margin-bottom: 20px;
+        }
+
+        .assessment-cta p {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .assessment-cta button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .assessment-cta button:hover {
+            background-color: #388E3C;
+            transform: translateY(-3px);
+        }
+
+        /* Assessment Summary Section */
+        .assessment-summary {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            max-width: 900px;
+            width: 90%;
+            margin: 50px auto; /* Centered with vertical space */
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .assessment-summary h3 {
+            font-size: 2.2em;
+            color: #388E3C; /* Darker green for summary heading */
+            margin-bottom: 20px;
+        }
+
+        .assessment-summary p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .assessment-summary #summaryScore {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #4CAF50;
+        }
+
+        .assessment-summary .summary-actions {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap; /* Allow buttons to wrap */
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .assessment-summary .summary-actions button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .assessment-summary .summary-actions button:hover {
+            background-color: #388E3C;
+            transform: translateY(-2px);
+        }
+
+        /* How It Works (Steps) Section - Kept, but largely hidden by JS for logged-in users on homepage */
+        .steps {
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        .steps h3 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .step {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .step a {
+            text-decoration: none;
+            color: inherit; /* Inherit text color from parent */
+            display: block; /* Make the entire div clickable via the link */
+        }
+
+        .step h4 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            color: #388E3C; /* Darker green for step headings */
+        }
+
+        .step p {
+            color: #666;
+            font-size: 1em;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: #f8fcf8; /* Slightly darker light green for contrast */
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        .features h3 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+            text-align: center;
+        }
+
+        .feature-item img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+
+        .feature-item h4 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        /* About Section */
+        .about {
+            padding: 60px 5%;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about h3 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .about p {
+            font-size: 1.1em;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #388E3C; /* Darker green for footer */
+            color: white;
+            padding: 30px 5%;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        footer nav ul {
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        footer nav ul li a {
+            color: white;
+        }
+
+        footer nav ul li a:hover {
+            color: #c8e6c9;
+        }
+
+        /* Chatbot Icon */
+        .chatbot-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            z-index: 1001;
+        }
+
+        .chatbot-icon:hover {
+            background-color: #388E3C;
+            transform: translateY(-5px);
+        }
+
+        /* Chatbot Popup */
+        .chatbot-popup {
+            position: fixed;
+            bottom: 100px; /* Above the icon */
+            right: 30px;
+            width: 350px;
+            height: 450px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1002;
+            transform: translateY(20px); /* Start slightly off screen */
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .chatbot-popup.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .chat-header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .chat-header .close-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f5f5f5;
+        }
+
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .chat-message.user {
+            background-color: #e0f2e0; /* Light green for user messages */
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .chat-message.bot {
+            background-color: #e0e0e0; /* Light grey for bot messages */
+            align-self: flex-start;
+            margin-right: auto;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 1em;
+            margin-right: 10px;
+        }
+
+        .chat-input button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .chat-input button:hover {
+            background-color: #388E3C;
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 10px 3%;
+                gap: 10px;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            .auth-controls {
+                margin-top: 10px;
+            }
+            .main-banner {
+                height: 350px;
+            }
+            .banner-content h1 {
+                font-size: 2.5em;
+            }
+            .banner-content p {
+                font-size: 1.1em;
+            }
+            /* Responsive for NEW Assessment CTA */
+            .assessment-cta {
+                padding: 40px 3%;
+                margin: 30px auto;
+            }
+            .assessment-cta h3 {
+                font-size: 2em;
+            }
+            .assessment-cta p {
+                font-size: 1em;
+            }
+            .assessment-cta button {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+            /* End NEW Assessment CTA Responsive */
+
+            .steps h3, .features h3, .about h3 {
+                font-size: 2em;
+            }
+            .steps-grid, .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .step, .feature-item {
+                padding: 20px;
+            }
+            .chatbot-icon {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.8em;
+            }
+            .chatbot-popup {
+                width: 90%;
+                right: 5%;
+                bottom: 80px;
+                height: 400px;
+            }
+            .assessment-summary {
+                padding: 20px;
+            }
+            .assessment-summary h3 {
+                font-size: 1.8em;
+            }
+            .assessment-summary p {
+                font-size: 1em;
+            }
+             .assessment-summary .summary-actions button {
+                width: 80%; /* Make buttons wider on small screens */
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">PeaceLane</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="auth-controls" id="authControls">
+            </div>
+        <div id="headerGreeting">Welcome!</div>
+    </header>
+
+    <main>
+        <section class="main-banner">
+            <div class="banner-overlay"></div>
+            <div class="banner-content">
+                <h1>Find Your Inner Peace</h1>
+                <p>Personalized support for your mental well-being journey.</p>
+                <button id="getStartedButton" onclick="location.href='register.html'">Get Started Today</button>
+            </div>
+        </section>
+
+        <section id="takeAssessmentCallToAction" class="assessment-cta" style="display:none;">
+            <div class="cta-content">
+                <h3>Ready to Check Your Well-being?</h3>
+                <p>Start your journey to mental peace with our quick assessment designed to give you insights into your current state.</p>
+                <button onclick="location.href='q.html'">Take the Assessment Now</button>
+            </div>
+        </section>
+
+        <div id="assessmentSummary" class="assessment-summary" style="display: none;">
+            <h3>Your Last Assessment Result</h3>
+            <p id="summaryScore"></p>
+            <p id="summaryMessage"></p>
+            <div class="summary-actions">
+                <button onclick="location.href='q.html'">Retake Assessment</button>
+                <button onclick="location.href='https://professionals.cadabamshospitals.com/doctors/mental-health-professionals-in-hyderabad?utm_source=paid&utm_medium=google_ads&utm_campaign=NND_hyd_emergency&gclid=CjwKCAjw1NK4BhAwEiwAVUHPUHS22MozbhLk7el5iW4A6Gwi_7vFYYmtdMdPi8Lei1CEY-t6OVal5BoClV0QAvD_BwE'" target="_blank">Find a Professional</button>
+                <button onclick="location.href='https://www.crazygames.com/game/worms-io'" target="_blank">Relax & Play Games</button>
+            </div>
+        </div>
+
+        <section class="steps" id="protectedSteps" style="display: none;">
+            <h3>How It Works</h3>
+            <div class="steps-grid">
+                <div class="step">
+                    <a href="q.html">
+                        <h4>Take an Assessment</h4>
+                        <p>Examine your mental health with our comprehensive assessment.</p>
+                    </a>
+                </div>
+                <div class="step">
+                    <a href="https://professionals.cadabamshospitals.com/doctors/mental-health-professionals-in-hyderabad?utm_source=paid&utm_medium=google_ads&utm_campaign=NND_hyd_emergency&gclid=CjwKCAjw1NK4BhAwEiwAVUHPUHS22MozbhLk7el5iW4A6Gwi_7vFYYmtdMdPi8Lei1CEY-t6OVal5BoClV0QAvD_BwE" target="_blank">
+                        <h4>Connect with Experts</h4>
+                        <p>Talk to professionals for personalized guidance and support.</p>
+                    </a>
+                </div>
+                <div class="step">
+                    <a href="untitled.html">
+                        <h4>Receive Ongoing Support</h4>
+                        <p>Get continuous resources and tailored support for your journey.</p>
+                    </a>
+                </div>
+                <div class="step">
+                    <a href="https://www.crazygames.com/game/worms-io" target="_blank">
+                        <h4>Relax & Play Games</h4>
+                        <p>Take a break and have some fun with our recommended games!</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h3>Our Key Features</h3>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <img src="C:\Users\ASHVVIN ROSHHAN\Downloads\download.png" alt="Feature Icon 1">
+                    <h4>Personalized Plans</h4>
+                    <p>Tailored strategies and resources to fit your unique needs.</p>
+                </div>
+                <div class="feature-item">
+                    <img src="C:\Users\ASHVVIN ROSHHAN\Downloads\expert-guidance-training-icon-outline_1076610-34959.avif" alt="Feature Icon 2">
+                    <h4>Expert Guidance</h4>
+                    <p>Connect with licensed professionals for compassionate support.</p>
+                </div>
+                <div class="feature-item">
+                    <img src="C:\Users\ASHVVIN ROSHHAN\Downloads\download (1).png" alt="Feature Icon 3">
+                    <h4>Community Support</h4>
+                    <p>Join a supportive community and share your journey.</p>
+                </div>
+                <div class="feature-item">
+                    <img src="C:\Users\ASHVVIN ROSHHAN\Downloads\track-your-progress-business-line-icon-vector-46087250.webp" alt="Feature Icon 4">
+                    <h4>Progress Tracking</h4>
+                    <p>Monitor your progress and celebrate your mental health milestones.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about">
+            <h3>About PeaceLane</h3>
+            <p>PeaceLane is dedicated to providing accessible and personalized mental well-being support. We believe that everyone deserves the tools and resources to navigate life's challenges with resilience and grace. Our platform offers a safe space for self-discovery, growth, and connection.</p>
+            <p>Our mission is to empower individuals to take charge of their mental health journey, offering a blend of self-assessment tools, professional guidance, and supportive communities. Join us on your path to inner peace and a healthier mind.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </nav>
+        <p>&copy; 2023 PeaceLane. All rights reserved.</p>
+    </footer>
+
+    <div class="chatbot-icon" onclick="toggleChat()">
+        💬
+    </div>
+
+    <div class="chatbot-popup" id="chatbotPopup">
+        <div class="chat-header">
+            PeaceBot
+            <button class="close-btn" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-message bot">Hello! How can I help you today?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to update header and content based on login status and assessment score
+        function updatePageContent() {
+            const authControls = document.getElementById('authControls');
+            const headerGreeting = document.getElementById('headerGreeting');
+            const getStartedButton = document.getElementById('getStartedButton'); // New
+            const takeAssessmentCallToAction = document.getElementById('takeAssessmentCallToAction'); // New
+            const assessmentSummary = document.getElementById('assessmentSummary');
+            const summaryScore = document.getElementById('summaryScore');
+            const summaryMessage = document.getElementById('summaryMessage');
+            const protectedSteps = document.getElementById('protectedSteps'); // Kept, but mostly hidden for logged-in on homepage now.
+            
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            const lastAssessmentScore = parseInt(localStorage.getItem('assessmentScore'));
+
+            // Reset visibility of main sections to a common starting point
+            getStartedButton.style.display = 'block'; // Default: visible (for logged out)
+            takeAssessmentCallToAction.style.display = 'none'; // Default: hidden
+            assessmentSummary.style.display = 'none'; // Default: hidden
+            protectedSteps.style.display = 'none'; // Default: hidden for logged-in users on homepage
+
+            // 1. Update Header Greeting and Auth Controls
+            if (loggedInUser && loggedInUser.fullName) {
+                headerGreeting.textContent = `Hello, ${loggedInUser.fullName}!`;
+                authControls.innerHTML = `
+                    <button id="logoutButton">Logout</button>
+                `;
+                document.getElementById('logoutButton').addEventListener('click', function() {
+                    localStorage.removeItem('loggedInUser');
+                    localStorage.removeItem('assessmentScore'); // Clear score on logout
+                    alert('You have been logged out.');
+                    updatePageContent(); // Update page content after logout
+                });
+                
+                // Hide "Get Started Today" button for logged-in users
+                getStartedButton.style.display = 'none';
+
+                // 2. Show appropriate content based on assessment status for LOGGED-IN users
+                if (!isNaN(lastAssessmentScore)) {
+                    // User is logged in AND has an assessment score
+                    assessmentSummary.style.display = 'block';
+                    
+                    summaryScore.textContent = `Your last score: ${lastAssessmentScore} out of 30`;
+
+                    let message = "";
+                    let advice = "";
+
+                    if (lastAssessmentScore >= 0 && lastAssessmentScore <= 4) {
+                        message = "Minimal to No Indication of Distress.";
+                        advice = "You're doing great! Keep up healthy habits. You can always retake the assessment to track your well-being.";
+                    } else if (lastAssessmentScore >= 5 && lastAssessmentScore <= 9) {
+                        message = "Mild Indication of Distress.";
+                        advice = "You might be experiencing some mild challenges. Consider self-care strategies or reaching out to a trusted friend. Retake the assessment anytime.";
+                    } else if (lastAssessmentScore >= 10 && lastAssessmentScore <= 14) {
+                        message = "Moderate Indication of Distress.";
+                        advice = "Your responses suggest moderate challenges. Exploring professional support could be beneficial. Click 'Find a Professional' below.";
+                    } else if (lastAssessmentScore >= 15 && lastAssessmentScore <= 19) {
+                        message = "Moderately Severe Indication of Distress.";
+                        advice = "You appear to be experiencing moderately severe challenges. It's highly recommended that you seek immediate support from a mental health professional.";
+                    } else if (lastAssessmentScore >= 20 && lastAssessmentScore <= 30) {
+                        message = "Severe Indication of Distress.";
+                        advice = "Your responses indicate severe distress. Please seek immediate support from a mental health professional or emergency services. You are not alone, and help is available.";
+                    }
+                    summaryMessage.innerHTML = `<strong>${message}</strong><br><br>${advice}`;
+
+                } else {
+                    // User is logged in but has NO assessment score
+                    takeAssessmentCallToAction.style.display = 'block';
+                }
+
+            } else {
+                // User is NOT logged in
+                headerGreeting.textContent = 'Welcome!';
+                authControls.innerHTML = `
+                    <button onclick="location.href='login.html'">Login</button>
+                    <button onclick="location.href='register.html'">Register</button>
+                `;
+                // "Get Started" button remains visible by default (it's 'block' above)
+            }
+        }
+
+        // Function to handle clicks on protected links (less relevant for home page now, but good to keep)
+        function handleProtectedLink(event) {
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            if (!loggedInUser) {
+                event.preventDefault(); // Stop navigation
+                alert('You need to be logged in to access this feature. Please login or register.');
+            }
+            // If logged in, the event will proceed as normal.
+        }
+
+        // Call updatePageContent on page load and add event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            updatePageContent(); 
+
+            // Add event listeners to all 'a' tags within the '.steps-grid' for protection
+            // This is primarily a safeguard now as #protectedSteps is generally hidden.
+            const stepLinks = document.querySelectorAll('#protectedSteps .steps-grid .step a');
+            stepLinks.forEach(link => {
+                link.addEventListener('click', handleProtectedLink);
+            });
+        });
+
+        // --- Chatbot Script (Existing - Remains Unchanged) ---
+        function toggleChat() {
+            const chatbotPopup = document.getElementById('chatbotPopup');
+            chatbotPopup.classList.toggle('active');
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const message = userInput.value.trim();
+            if (message === '') return;
+
+            const chatMessages = document.getElementById('chatMessages');
+
+            // Add user message
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.classList.add('chat-message', 'user');
+            userMessageDiv.textContent = message;
+            chatMessages.appendChild(userMessageDiv);
+
+            userInput.value = ''; // Clear input
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+
+            // Simulate bot response (replace with actual AI/backend integration)
+            setTimeout(() => {
+                const botMessageDiv = document.createElement('div');
+                botMessageDiv.classList.add('chat-message', 'bot');
+                
+                let botResponse = "I'm a simple bot. How can I assist you further?";
+
+                if (message.toLowerCase().includes('hello') || message.toLowerCase().includes('hi')) {
+                    botResponse = "Hello there! How are you feeling today?";
+                } else if (message.toLowerCase().includes('assessment')) {
+                    botResponse = "To take our mental health assessment, please ensure you are logged in and then click on 'Take the Assessment Now' on the homepage.";
+                } else if (message.toLowerCase().includes('games')) {
+                    botResponse = "You can relax and play games after taking the assessment. Check the assessment result summary on the homepage for the option!";
+                } else if (message.toLowerCase().includes('help')) {
+                    botResponse = "I can answer general questions about PeaceLane or guide you to our features. What do you need help with?";
+                } else if (message.toLowerCase().includes('login') || message.toLowerCase().includes('register')) {
+                    botResponse = "You can find the Login/Register buttons in the top right corner of the page.";
+                } else if (message.toLowerCase().includes('thank')) {
+                    botResponse = "You're welcome! Is there anything else?";
+                } else if (message.toLowerCase().includes('professional')) {
+                    botResponse = "You can connect with mental health professionals through the link provided in your assessment summary after you've taken the assessment.";
+                }
+
+                botMessageDiv.textContent = botResponse;
+                chatMessages.appendChild(botMessageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+            }, 500);
+        }
+
+        document.getElementById("userInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeaceLane - Your Assessment Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Body & Typography - Matching Index and Assessment Pages */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #e6ffe6 0%, #d1f8d1 100%); /* Light green, inviting gradient */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Allow content to stack */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure it takes full viewport height */
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: #4CAF50; /* Primary green color for headings */
+        }
+
+        /* Result Container - Similar to login/assessment container */
+        .result-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            max-width: 900px; /* Increased max-width for more content */
+            width: 90%; /* Responsive width */
+            box-sizing: border-box;
+            margin: 20px auto; /* Add margin for spacing */
+            animation: fadeInScale 0.8s ease-out; /* Animation */
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .result-container h2 {
+            font-size: 2.8em;
+            margin-bottom: 25px;
+            color: #4CAF50;
+            font-weight: 700;
+        }
+
+        .result-container #scoreDisplay {
+            font-size: 1.5em;
+            color: #555;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .result-container #resultMessage {
+            font-size: 1.2em;
+            color: #444;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Suggestions Section */
+        .suggestions-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px dashed #d4ecd4; /* Subtle separator */
+            text-align: left; /* Align text within suggestions */
+        }
+
+        .suggestions-section h3 {
+            font-size: 2em;
+            color: #388E3C;
+            margin-bottom: 25px;
+            text-align: center; /* Center heading */
+        }
+
+        .suggestion-category {
+            margin-bottom: 30px;
+        }
+
+        .suggestion-category h4 {
+            font-size: 1.6em;
+            color: #4CAF50;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e0f2e0; /* Underline for category */
+            padding-bottom: 5px;
+            text-align: left; /* Align category heading */
+        }
+
+        .suggestion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .suggestion-item {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .suggestion-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .suggestion-item h5 {
+            font-size: 1.2em;
+            color: #388E3C;
+            margin-bottom: 10px;
+        }
+
+        .suggestion-item p {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .suggestion-item a {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .suggestion-item a:hover {
+            background-color: #388E3C;
+        }
+
+        /* General Call to Action Buttons (at the bottom) */
+        .general-call-to-action {
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap; /* Allow buttons to wrap */
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .general-call-to-action button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .general-call-to-action button:hover {
+            background-color: #388E3C;
+            transform: translateY(-2px);
+        }
+
+        .general-call-to-action .secondary-btn {
+            background-color: #f0f0f0;
+            color: #4CAF50;
+            border: 1px solid #4CAF50;
+        }
+
+        .general-call-to-action .secondary-btn:hover {
+            background-color: #e0f2e0;
+            color: #388E3C;
+            border-color: #388E3C;
+        }
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .result-container {
+                padding: 25px;
+                margin: 15px auto;
+            }
+            .result-container h2 {
+                font-size: 2.2em;
+            }
+            .result-container #scoreDisplay {
+                font-size: 1.3em;
+            }
+            .result-container #resultMessage {
+                font-size: 1em;
+            }
+            .suggestions-section h3 {
+                font-size: 1.8em;
+            }
+            .suggestion-category h4 {
+                font-size: 1.4em;
+            }
+            .suggestion-grid {
+                grid-template-columns: 1fr; /* Stack items on small screens */
+            }
+            .general-call-to-action button {
+                width: 100%; /* Make buttons full width */
+                max-width: 300px; /* Limit max width */
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h2>Your Assessment Result</h2>
+        <p id="scoreDisplay">Calculating your score...</p>
+        <p id="resultMessage">Please wait while we process your results.</p>
+
+        <div class="suggestions-section">
+            <h3>Next Steps & Suggestions for Your Well-being</h3>
+            
+            <div id="supportSuggestions" class="suggestion-category">
+                <h4>Connect with Support</h4>
+                <div class="suggestion-grid">
+                    <div class="suggestion-item">
+                        <h5>Find a Professional</h5>
+                        <p>Speak with licensed mental health experts for personalized care.</p>
+                        <a href="https://professionals.cadabamshospitals.com/doctors/mental-health-professionals-in-hyderabad?utm_source=paid&utm_medium=google_ads&utm_campaign=NND_hyd_emergency&gclid=CjwKCAjw1NK4BhAwEiwAVUHPUHS22MozbhLk7el5iW4A6Gwi_7vFYYmtdMdPi8Lei1CEY-t6OVal5BoClV0QAvD_BwE" target="_blank">Connect Now</a>
+                    </div>
+                    <div class="suggestion-item">
+                        <h5>Community Support</h5>
+                        <p>Join our online forums to share experiences and find peer support.</p>
+                        <a href="#" onclick="alert('Community features coming soon!')">Explore Community</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="relaxationSuggestions" class="suggestion-category" style="display:none;">
+                <h4>Relax & Rejuvenate</h4>
+                <div class="suggestion-grid">
+                    <div class="suggestion-item">
+                        <h5>Calming Music</h5>
+                        <p>Listen to soothing tunes to reduce stress and improve focus.</p>
+                        <a href="https://www.youtube.com/results?search_query=calming+ambient+music+for+stress+relief" target="_blank">Listen Now</a>
+                    </div>
+                    <div class="suggestion-item">
+                        <h5>Mindful Movies</h5>
+                        <p>Watch films that promote peace, happiness, and personal growth.</p>
+                        <a href="https://www.youtube.com/results?search_query=mindful+peaceful+movies" target="_blank">Watch Now</a>
+                    </div>
+                    <div class="suggestion-item">
+                        <h5>Fun Games</h5>
+                        <p>Take a break and unwind with some engaging and lighthearted games.</p>
+                        <a href="https://www.crazygames.com/game/worms-io" target="_blank">Play Now</a>
+                    </div>
+                    <div class="suggestion-item">
+                        <h5>Guided Meditations</h5>
+                        <p>Practice mindfulness with guided audio sessions.</p>
+                        <a href="https://www.youtube.com/results?search_query=10+minute+guided+meditation+for+anxiety" target="_blank">Start Meditating</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="growthSuggestions" class="suggestion-category" style="display:none;">
+                <h4>Explore & Grow</h4>
+                <div class="suggestion-grid">
+                    <div class="suggestion-item">
+                        <h5>Educational Resources</h5>
+                        <p>Learn more about mental health and well-being through articles and guides.</p>
+                        <a href="#" onclick="alert('Educational resources coming soon!')">Learn More</a>
+                    </div>
+                    <div class="suggestion-item">
+                        <h5>Inspirational Movies</h5>
+                        <p>Find motivation and perspective with uplifting stories.</p>
+                        <a href="https://www.youtube.com/results?search_query=inspirational+feel-good+movies" target="_blank">Discover Films</a>
+                    </div>
+                    <div class="suggestion-item">
+                        <h5>Uplifting Music</h5>
+                        <p>Boost your mood with positive and energizing playlists.</p>
+                        <a href="https://www.youtube.com/results?search_query=uplifting+happy+music" target="_blank">Listen Now</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="general-call-to-action">
+            <button onclick="location.href='index.html'">Back to Home</button>
+            <button class="secondary-btn" onclick="location.href='q.html'">Retake Assessment</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const resultMessage = document.getElementById('resultMessage');
+            const supportSuggestions = document.getElementById('supportSuggestions');
+            const relaxationSuggestions = document.getElementById('relaxationSuggestions');
+            const growthSuggestions = document.getElementById('growthSuggestions');
+
+            const totalScore = parseInt(localStorage.getItem('assessmentScore'));
+
+            if (isNaN(totalScore)) {
+                scoreDisplay.textContent = "Error: Score not found.";
+                resultMessage.textContent = "It seems there was an issue retrieving your assessment score. Please try taking the assessment again.";
+                return;
+            }
+
+            scoreDisplay.textContent = `Your total score: ${totalScore} out of 30`;
+
+            let message = "";
+            let advice = "";
+
+            // Determine message and advice based on score
+            if (totalScore >= 0 && totalScore <= 4) {
+                message = "Minimal to No Indication of Distress.";
+                advice = "Your responses suggest a generally positive mental well-being. Keep up healthy habits like regular exercise, balanced diet, and sufficient sleep. Remember to practice mindfulness and engage in activities you enjoy!";
+                // Show more relaxation and growth suggestions for lower scores
+                relaxationSuggestions.style.display = 'block';
+                growthSuggestions.style.display = 'block';
+            } else if (totalScore >= 5 && totalScore <= 9) {
+                message = "Mild Indication of Distress.";
+                advice = "You might be experiencing some mild challenges. Consider incorporating more stress-reduction techniques into your routine, such as meditation, journaling, or spending time in nature. Don't hesitate to reach out to a trusted friend or family member.";
+                // Emphasize relaxation, also show growth
+                relaxationSuggestions.style.display = 'block';
+                growthSuggestions.style.display = 'block';
+            } else if (totalScore >= 10 && totalScore <= 14) {
+                message = "Moderate Indication of Distress.";
+                advice = "Your responses suggest moderate challenges. It could be beneficial to explore professional support. Speaking with a therapist or counselor can provide you with effective coping strategies and a safe space to discuss your feelings.";
+                // Emphasize support and relaxation
+                relaxationSuggestions.style.display = 'block';
+            } else if (totalScore >= 15 && totalScore <= 19) {
+                message = "Moderately Severe Indication of Distress.";
+                advice = "You appear to be experiencing moderately severe challenges. It's highly recommended that you seek immediate support from a mental health professional. They can offer personalized guidance and treatment plans.";
+                // Strong emphasis on support
+            } else if (totalScore >= 20 && totalScore <= 30) {
+                message = "Severe Indication of Distress.";
+                advice = "Your responses indicate severe distress. Please seek immediate support from a mental health professional or emergency services if you are in crisis. You are not alone, and help is available.";
+                // Strongest emphasis on support
+            } else {
+                message = "Invalid Score.";
+                advice = "There was an unexpected score. Please re-take the assessment.";
+            }
+
+            resultMessage.innerHTML = `<strong>${message}</strong><br><br>${advice}`;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeaceLane - Our Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Body & Typography - Consistent with other pages */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #e6ffe6 0%, #d1f8d1 100%); /* Light green, inviting gradient */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: #4CAF50; /* Primary green color for headings */
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #388E3C;
+        }
+
+        /* Header - Consistent with index.html */
+        header {
+            background-color: #f0fff0; /* Very light green for header */
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #d4ecd4;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            font-size: 1.05em;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #4CAF50;
+        }
+        
+        .auth-controls button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-left: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-controls button:hover {
+            background-color: #388E3C;
+            transform: translateY(-2px);
+        }
+
+        #headerGreeting {
+            font-size: 1.1em;
+            color: #4CAF50;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+
+        /* Main Content Styling */
+        main {
+            padding: 40px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero/Banner Section */
+        .services-hero {
+            background-color: #e0f2e0; /* Light green background */
+            padding: 60px 4%;
+            border-radius: 15px;
+            margin-bottom: 50px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .services-hero h1 {
+            font-size: 3.2em;
+            margin-bottom: 20px;
+            color: #388E3C;
+        }
+
+        .services-hero p {
+            font-size: 1.3em;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Core Services Grid */
+        .core-services, .additional-resources {
+            margin-bottom: 60px;
+        }
+
+        .core-services h2, .additional-resources h2 {
+            font-size: 2.8em;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #4CAF50;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #388E3C;
+        }
+
+        .service-card p {
+            font-size: 1.05em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .service-card .btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .service-card .btn:hover {
+            background-color: #388E3C;
+            transform: translateY(-2px);
+        }
+
+        .service-card .coming-soon {
+            background-color: #ccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .service-card .coming-soon:hover {
+             background-color: #ccc;
+             transform: none;
+        }
+
+
+        /* Call to Action Section */
+        .cta-section {
+            background-color: #4CAF50;
+            color: white;
+            padding: 60px 5%;
+            text-align: center;
+            border-radius: 15px;
+            margin-top: 50px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section .btn {
+            background-color: #ffc107; /* Accent yellow */
+            color: #333;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cta-section .btn:hover {
+            background-color: #e0a800;
+            transform: translateY(-3px);
+        }
+
+        /* Footer - Consistent with index.html */
+        footer {
+            background-color: #388E3C; /* Darker green for footer */
+            color: white;
+            padding: 30px 5%;
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: 50px;
+        }
+
+        footer nav ul {
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        footer nav ul li a {
+            color: white;
+        }
+
+        footer nav ul li a:hover {
+            color: #c8e6c9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 10px 3%;
+                gap: 10px;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            .auth-controls {
+                margin-top: 10px;
+            }
+
+            .services-hero {
+                padding: 40px 3%;
+            }
+            .services-hero h1 {
+                font-size: 2.5em;
+            }
+            .services-hero p {
+                font-size: 1.1em;
+            }
+
+            .core-services h2, .additional-resources h2, .cta-section h2 {
+                font-size: 2.2em;
+            }
+            
+            .service-grid {
+                grid-template-columns: 1fr; /* Stack cards on small screens */
+            }
+
+            .service-card {
+                padding: 25px;
+            }
+            .service-card h3 {
+                font-size: 1.5em;
+            }
+            .service-card p {
+                font-size: 1em;
+            }
+
+            .cta-section {
+                padding: 40px 3%;
+            }
+            .cta-section p {
+                font-size: 1.1em;
+            }
+            .cta-section .btn {
+                font-size: 1.1em;
+                padding: 12px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">PeaceLane</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="#">Blog</a></li> <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="auth-controls" id="authControls">
+            </div>
+        <div id="headerGreeting">Welcome!</div>
+    </header>
+
+    <main>
+        <section class="services-hero">
+            <h1>Our Services for Your Well-being</h1>
+            <p>PeaceLane offers a comprehensive suite of tools and resources designed to support your mental health journey, every step of the way.</p>
+        </section>
+
+        <section class="core-services">
+            <h2>Your Path to Inner Peace Starts Here</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>Personalized Assessment</h3>
+                    <p>Gain immediate insights into your mental well-being with our comprehensive, confidential assessment. Understand your current state and receive tailored guidance.</p>
+                    <a href="q.html" class="btn">Take Assessment</a>
+                </div>
+                <div class="service-card">
+                    <h3>Expert Connections</h3>
+                    <p>Connect with a network of licensed mental health professionals and therapists. Find the right support that understands your unique needs.</p>
+                    <a href="https://professionals.cadabamshospitals.com/doctors/mental-health-professionals-in-hyderabad?utm_source=paid&utm_medium=google_ads&utm_campaign=NND_hyd_emergency&gclid=CjwKCAjw1NK4BhAwEiwAVUHPUHS22MozbhLk7el5iW4A6Gwi_7vFYYmtdMdPi8Lei1CEY-t6OVal5BoClV0QAvD_BwE" target="_blank" class="btn">Find a Professional</a>
+                </div>
+                <div class="service-card">
+                    <h3>Daily Well-being Check-in</h3>
+                    <p>Track your mood daily, receive personalized suggestions based on how you feel, and build a consistent routine for self-awareness and improvement.</p>
+                    <a href="index.html#dailyCheckinSection" class="btn">Start Check-in</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="additional-resources">
+            <h2>Additional Resources to Support You</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>Relax & Rejuvenate Hub</h3>
+                    <p>Unwind with our curated hub of calming music, mindful movies, engaging games, and guided meditations designed to help you de-stress and find peace.</p>
+                    <a href="result.html" class="btn">Explore Now</a>
+                </div>
+                <div class="service-card">
+                    <h3>Community Support</h3>
+                    <p>Join a supportive community where you can share experiences, connect with peers, and find encouragement in a safe and understanding environment.</p>
+                    <a href="#" onclick="alert('Community features coming soon!')" class="btn coming-soon">Join Community</a>
+                </div>
+                <div class="service-card">
+                    <h3>Educational Resources</h3>
+                    <p>Expand your knowledge with our library of articles, guides, and workshops covering various mental health topics, coping strategies, and personal growth tips.</p>
+                    <a href="#" onclick="alert('Educational resources coming soon!')" class="btn coming-soon">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready to Begin Your Journey?</h2>
+            <p>Take the first step towards a healthier, happier you. It's simple, confidential, and designed with your well-being in mind.</p>
+            <a href="q.html" class="btn">Take the Assessment Now</a>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </nav>
+        <p>&copy; 2024 PeaceLane. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // --- Header Authentication Logic (Copied from index.html) ---
+        function updateHeaderAuth() {
+            const authControls = document.getElementById('authControls');
+            const headerGreeting = document.getElementById('headerGreeting');
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+
+            if (loggedInUser && loggedInUser.fullName) {
+                headerGreeting.textContent = `Hello, ${loggedInUser.fullName}!`;
+                authControls.innerHTML = `
+                    <button id="logoutButton">Logout</button>
+                `;
+                document.getElementById('logoutButton').addEventListener('click', function() {
+                    localStorage.removeItem('loggedInUser');
+                    localStorage.removeItem('assessmentScore'); 
+                    alert('You have been logged out.');
+                    // Redirect to home or update current page if needed
+                    window.location.href = 'index.html'; 
+                });
+            } else {
+                headerGreeting.textContent = 'Welcome!';
+                authControls.innerHTML = `
+                    <button onclick="location.href='login.html'">Login</button>
+                    <button onclick="location.href='register.html'">Register</button>
+                `;
+            }
+        }
+
+        // Call on page load
+        document.addEventListener('DOMContentLoaded', updateHeaderAuth);
+    </script>
+</body>
+</html>

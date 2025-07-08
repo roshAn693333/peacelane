@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeaceLane - Mental Health Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Body & Typography - Matching Index Page */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #e6ffe6 0%, #d1f8d1 100%); /* Light green, inviting gradient from index.html */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure it takes full viewport height */
+            box-sizing: border-box;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: #4CAF50; /* Primary green color for headings */
+        }
+
+        /* Assessment Container */
+        .assessment-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            max-width: 90%; /* Responsive max width */
+            width: 1000px; /* Max width for larger screens */
+            text-align: center;
+            box-sizing: border-box;
+            overflow: hidden; /* Important for horizontal scrolling on small screens */
+        }
+
+        .assessment-container h2 {
+            font-size: 2.8em; /* Larger heading */
+            margin-bottom: 30px;
+            color: #4CAF50;
+            font-weight: 700;
+        }
+
+        .assessment-container p {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        /* Horizontal Questions/Steps Layout */
+        .question-flow-wrapper {
+            /* This wrapper is crucial for enabling horizontal scrolling if content overflows */
+            overflow-x: auto; /* Enable horizontal scrolling */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            padding-bottom: 20px; /* Space for scrollbar */
+            margin-bottom: 30px; /* Space above buttons */
+        }
+
+        .questions-container {
+            display: flex; /* Makes immediate children (questions) align horizontally */
+            gap: 25px; /* Space between each question card */
+            padding: 10px; /* Internal padding for wrapper */
+            justify-content: flex-start; /* Align items to the start, allows overflow */
+            align-items: stretch; /* Make all cards have the same height */
+        }
+
+        .question-card {
+            flex-shrink: 0; /* Prevents cards from shrinking */
+            width: 350px; /* Fixed width for each card */
+            min-height: 250px; /* Minimum height for consistency */
+            background-color: #f9fdf9; /* Slightly off-white for cards */
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Pushes question to top, options to middle, etc. */
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-card h3 {
+            font-size: 1.4em; /* Question text size */
+            color: #388E3C; /* Darker green for questions */
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column; /* Options stacked vertically within card */
+            gap: 10px; /* Space between options */
+            margin-bottom: 20px;
+        }
+
+        .option-button {
+            background-color: #f0f0f0; /* Light grey for unselected options */
+            color: #555;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            text-align: left;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+            user-select: none; /* Prevent text selection on double click */
+        }
+
+        .option-button:hover {
+            background-color: #e0f2e0; /* Lighter green on hover */
+            border-color: #a8e063;
+        }
+
+        .option-button.selected {
+            background-color: #4CAF50; /* Primary green when selected */
+            color: white;
+            border-color: #4CAF50;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Navigation Buttons */
+        .assessment-navigation {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .assessment-navigation button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .assessment-navigation button:hover {
+            background-color: #388E3C;
+            transform: translateY(-2px);
+        }
+
+        .assessment-navigation button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .assessment-container {
+                padding: 30px;
+            }
+            .question-card {
+                width: 320px; /* Slightly smaller cards for medium screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                align-items: flex-start; /* Align to top on small screens to make space for scrolling */
+                padding: 20px 0;
+            }
+            .assessment-container {
+                padding: 20px;
+                max-width: 95%; /* Take more width on very small screens */
+            }
+            .assessment-container h2 {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+            .assessment-container p {
+                font-size: 1em;
+                margin-bottom: 30px;
+            }
+            .questions-container {
+                flex-wrap: nowrap; /* Keep horizontal on small screens but allow scrolling */
+                overflow-x: auto; /* Explicitly ensure scrolling */
+                justify-content: flex-start; /* Important for scrollable content */
+                padding-bottom: 15px; /* Ensure scrollbar is visible */
+            }
+            .question-card {
+                width: 280px; /* Fixed width for cards on small screens */
+                min-height: 220px;
+                padding: 20px;
+            }
+            .question-card h3 {
+                font-size: 1.2em;
+            }
+            .option-button {
+                font-size: 0.9em;
+                padding: 8px 12px;
+            }
+            .assessment-navigation {
+                flex-direction: column; /* Stack buttons vertically */
+                gap: 15px;
+            }
+            .assessment-navigation button {
+                width: 80%; /* Make buttons wider */
+                margin: 0 auto; /* Center buttons */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .question-card {
+                width: 90vw; /* Take almost full viewport width */
+                margin-right: 15px; /* Space between cards */
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="assessment-container">
+        <h2>Mental Health Assessment</h2>
+        <p>Answer the following questions to help us understand your well-being. Your responses are confidential.</p>
+
+        <div class="question-flow-wrapper">
+            <div class="questions-container" id="questionsContainer">
+                </div>
+        </div>
+
+        <div class="assessment-navigation">
+            <button id="prevQuestionBtn" disabled>Previous</button>
+            <button id="nextQuestionBtn">Next</button>
+            <button id="submitAssessmentBtn" style="display: none;">Submit Assessment</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Over the last two weeks, how often have you been bothered by feeling down, depressed, or hopeless?",
+                options: [
+                    { text: "Not at all", score: 0 },
+                    { text: "Several days", score: 1 },
+                    { text: "More than half the days", score: 2 },
+                    { text: "Nearly every day", score: 3 }
+                ]
+            },
+            {
+                question: "Over the last two weeks, how often have you been bothered by having little interest or pleasure in doing things?",
+                options: [
+                    { text: "Not at all", score: 0 },
+                    { text: "Several days", score: 1 },
+                    { text: "More than half the days", score: 2 },
+                    { text: "Nearly every day", score: 3 }
+                ]
+            },
+            {
+                question: "Over the last two weeks, how often have you been bothered by trouble falling or staying asleep, or sleeping too much?",
+                options: [
+                    { text: "Not at all", score: 0 },
+                    { text: "Several days", score: 1 },
+                    { text: "More than half the days", score: 2 },
+                    { text: "Nearly every day", score: 3 }
+                ]
+            },
+            {
+                question: "Over the last two weeks, how often have you been bothered by feeling tired or having little energy?",
+                options: [
+                    { text: "Not at all", score: 0 },
+                    { text: "Several days", score: 1 },
+                    { text: "More than half the days", score: 2 },
+                    { text: "Nearly every day", score: 3 }
+                ]
+            },
+            {
+                question: "Over the last two weeks, how often have you been bothered by poor appetite or overeating?",
+                options: [
+                    { text: "Not at all", score: 0 },
+                    { text: "Several days", score: 1 },
+                    { text: "More than half the days", score: 2 },
+                    { text: "Nearly every day", score: 3 }
+                ]
+            },
+            {
+                question: "Over the last two weeks, how often have you been bothered by feeling bad about yourself - or that you are a failure or have let yourself or your family down?",
+                options: [
+                    { text: "Not at all", score: 0 },
+                    { text: "Several days", score: 1 },
+                    { text: "More than half the days", score: 2 },
+                    { text: "Nearly every day", score: 3 }
+                ]
+            },
+            {
+                question: "Over the last two weeks, how often have you been bothered by trouble concentrating on things, such as reading the newspaper or watching television?",
+                options: [
+                    { text: "Not at all", score: 0 },
+                    { text: "Several days", score: 1 },
+                    { text: "More than half the days", score: 2 },
+                    { text: "Nearly every day", score: 3 }
+                ]
+            },
+            {
+                question: "Over the last two weeks, how often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual?",
+                options: [
+                    { text: "Not at all", score: 0 },
+                    { text: "Several days", score: 1 },
+                    { text: "More than half the days", score: 2 },
+                    { text: "Nearly every day", score: 3 }
+                ]
+            },
+            {
+                question: "Over the last two weeks, how often have you been bothered by thoughts that you would be better off dead, or of hurting yourself in some way?",
+                options: [
+                    { text: "Not at all", score: 0 },
+                    { text: "Several days", score: 1 },
+                    { text: "More than half the days", score: 2 },
+                    { text: "Nearly every day", score: 3 }
+                ]
+            },
+            {
+                question: "If you've had any problems over the last two weeks, how difficult have these problems made it for you to do your work, take care of things at home, or get along with other people?",
+                options: [
+                    { text: "Not difficult at all", score: 0 },
+                    { text: "Somewhat difficult", score: 1 },
+                    { text: "Very difficult", score: 2 },
+                    { text: "Extremely difficult", score: 3 }
+                ]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        const answers = new Array(questions.length).fill(null); // To store selected answer scores
+        const questionsContainer = document.getElementById('questionsContainer');
+        const prevQuestionBtn = document.getElementById('prevQuestionBtn');
+        const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+        const submitAssessmentBtn = document.getElementById('submitAssessmentBtn');
+
+        function renderQuestions() {
+            questionsContainer.innerHTML = ''; // Clear previous questions
+            questions.forEach((q, index) => {
+                const questionCard = document.createElement('div');
+                questionCard.classList.add('question-card');
+                questionCard.dataset.index = index; // Store index for navigation
+
+                questionCard.innerHTML = `
+                    <h3>${index + 1}. ${q.question}</h3>
+                    <div class="options" id="options-${index}">
+                        ${q.options.map((option, optIndex) => `
+                            <button class="option-button" data-score="${option.score}" data-q-index="${index}" data-opt-index="${optIndex}">
+                                ${option.text}
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+                questionsContainer.appendChild(questionCard);
+
+                // Add event listeners to options
+                const optionButtons = questionCard.querySelectorAll('.option-button');
+                optionButtons.forEach(button => {
+                    button.addEventListener('click', selectOption);
+                });
+
+                // Restore selected state if answer already exists
+                if (answers[index] !== null) {
+                    const selectedOptionButton = questionCard.querySelector(`[data-opt-index="${answers[index].optIndex}"]`);
+                    if (selectedOptionButton) {
+                        selectedOptionButton.classList.add('selected');
+                    }
+                }
+            });
+            scrollToCurrentQuestion();
+            updateNavigationButtons();
+        }
+
+        function selectOption(event) {
+            const selectedButton = event.target;
+            const qIndex = parseInt(selectedButton.dataset.qIndex);
+            const score = parseInt(selectedButton.dataset.score);
+            const optIndex = parseInt(selectedButton.dataset.optIndex);
+            
+            // Remove 'selected' class from all options of this question
+            const currentQuestionOptions = document.getElementById(`options-${qIndex}`).querySelectorAll('.option-button');
+            currentQuestionOptions.forEach(btn => btn.classList.remove('selected'));
+
+            // Add 'selected' class to the clicked option
+            selectedButton.classList.add('selected');
+
+            // Store the answer
+            answers[qIndex] = { score: score, optIndex: optIndex };
+
+            // Automatically move to the next question if this is not the last one
+            if (qIndex < questions.length - 1) {
+                setTimeout(() => {
+                    currentQuestionIndex = qIndex + 1;
+                    scrollToCurrentQuestion();
+                    updateNavigationButtons();
+                }, 200); // Small delay for visual feedback
+            } else {
+                 // If it's the last question and answered, show submit button
+                updateNavigationButtons();
+            }
+        }
+
+        function scrollToCurrentQuestion() {
+            const questionCards = document.querySelectorAll('.question-card');
+            if (questionCards[currentQuestionIndex]) {
+                questionCards[currentQuestionIndex].scrollIntoView({
+                    behavior: 'smooth',
+                    inline: 'center', // Center the current card in the view
+                    block: 'nearest' // Align block start to nearest edge if necessary
+                });
+            }
+        }
+
+        function updateNavigationButtons() {
+            prevQuestionBtn.disabled = currentQuestionIndex === 0;
+            
+            // Next button is disabled if current question isn't answered OR it's the last question
+            nextQuestionBtn.disabled = answers[currentQuestionIndex] === null || currentQuestionIndex === questions.length - 1;
+
+            if (currentQuestionIndex === questions.length - 1) {
+                // If on the last question, hide Next and show Submit
+                nextQuestionBtn.style.display = 'none';
+                submitAssessmentBtn.style.display = 'block';
+            } else {
+                // Otherwise, show Next and hide Submit
+                nextQuestionBtn.style.display = 'block';
+                submitAssessmentBtn.style.display = 'none';
+            }
+             // Disable submit button if any question is unanswered
+            const allAnswered = answers.every(answer => answer !== null);
+            submitAssessmentBtn.disabled = !allAnswered;
+        }
+
+        function navigateQuestions(direction) {
+            if (direction === 'prev' && currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+            } else if (direction === 'next' && currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+            }
+            scrollToCurrentQuestion();
+            updateNavigationButtons();
+        }
+
+        function submitAssessment() {
+            const allAnswered = answers.every(answer => answer !== null);
+            if (!allAnswered) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            const totalScore = answers.reduce((sum, current) => sum + current.score, 0);
+            
+            // Store the score in localStorage for index.html to read
+            localStorage.setItem('assessmentScore', totalScore);
+            
+            // Redirect to the result page
+            window.location.href = 'r.html';
+        }
+
+        // Event Listeners for Navigation Buttons
+        prevQuestionBtn.addEventListener('click', () => navigateQuestions('prev'));
+        nextQuestionBtn.addEventListener('click', () => navigateQuestions('next'));
+        submitAssessmentBtn.addEventListener('click', submitAssessment);
+
+        // Initial render on page load
+        document.addEventListener('DOMContentLoaded', renderQuestions);
+    </script>
+</body>
+</html>
